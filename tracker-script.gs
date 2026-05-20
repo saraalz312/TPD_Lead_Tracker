@@ -15,6 +15,11 @@
 function setupTracker() {
   const sheet = SpreadsheetApp.getActiveSheet();
   
+  // Rename sheet to "Tracker" if not already
+  if (sheet.getName() !== "Tracker") {
+    sheet.setName("Tracker");
+  }
+  
   // Create headers if they don't exist
   const headers = [
     "Date",
@@ -87,8 +92,8 @@ function createDashboard() {
     .setBackground("#4285F4")
     .setFontColor("white");
   
-  // Merge cells for title
-  dashboardSheet.mergeColumns(1, 4);
+  // Merge cells for title (FIXED - use mergeCells instead of mergeColumns)
+  dashboardSheet.getRange("A1:D1").mergeCells();
   
   // Current Month Section
   dashboardSheet.getRange("A3").setValue("This Month's Performance")
@@ -246,13 +251,12 @@ function campaignROAS() {
 // ========== INSTRUCTIONS ==========
 /*
 HOW TO USE:
-1. Rename your current sheet to "Tracker"
-2. Open Extensions → Apps Script
-3. Paste this entire code
-4. Click Save
-5. Run setupTracker() from the dropdown
-6. Authorize permissions
-7. Start logging leads!
+1. Open Extensions → Apps Script
+2. Paste this entire code
+3. Click Save
+4. Run setupTracker() from the dropdown
+5. Authorize permissions
+6. Start logging leads!
 
 COLUMNS (Auto-created):
 A - Date (format: YYYY-MM-DD)
