@@ -85,15 +85,12 @@ function createDashboard() {
   // Create new dashboard
   dashboardSheet = ss.insertSheet("Dashboard", 0);
   
-  // Title
+  // Title (without merge - keep it simple)
   dashboardSheet.getRange("A1").setValue("📊 Lead Tracker Dashboard")
     .setFontSize(16)
     .setFontWeight("bold")
     .setBackground("#4285F4")
     .setFontColor("white");
-  
-  // Merge cells for title (FIXED - use mergeCells instead of mergeColumns)
-  dashboardSheet.getRange("A1:D1").mergeCells();
   
   // Current Month Section
   dashboardSheet.getRange("A3").setValue("This Month's Performance")
