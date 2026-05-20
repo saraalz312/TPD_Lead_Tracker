@@ -13,12 +13,17 @@
 
 // ========== SETUP FUNCTION ==========
 function setupTracker() {
-  const sheet = SpreadsheetApp.getActiveSheet();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName("Tracker");
   
-  // Rename sheet to "Tracker" if not already
-  if (sheet.getName() !== "Tracker") {
+  // If Tracker sheet doesn't exist, create it from active sheet
+  if (!sheet) {
+    sheet = ss.getActiveSheet();
     sheet.setName("Tracker");
   }
+  
+  // Clear existing data (optional - comment out if you want to keep data)
+  // sheet.clearContents();
   
   // Create headers if they don't exist
   const headers = [
